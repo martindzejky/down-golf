@@ -4,4 +4,5 @@
 
 [node name="camera" type="Camera2D"]
 zoom = Vector2(2, 2)
+position_smoothing_enabled = true
 script = ExtResource("1_exrbp")
