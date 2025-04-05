@@ -24,6 +24,7 @@ var shoot_power = 0.0
 @export var animation: AnimationPlayer
 @export var sprite: Sprite2D
 @export var shoot_strength_bar: ProgressBar
+@export var pow: Sprite2D
 
 func _physics_process(delta):
   process_state_machine(delta)
@@ -136,5 +137,7 @@ func _on_shootarea_body_entered(body: Node2D) -> void:
     body.apply_central_impulse(impulse)
 
     animation.pause()
+    pow.visible = true
     await get_tree().create_timer(0.2).timeout
     animation.play()
+    pow.visible = false

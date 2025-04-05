@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxq1t72tlug6j"]
+[gd_scene load_steps=7 format=3 uid="uid://dxq1t72tlug6j"]
 
 [ext_resource type="Script" uid="uid://b5t7l065iqa2" path="res://objects/tree.gd" id="1_d8ko4"]
 [ext_resource type="Texture2D" uid="uid://dnxlucabod1c8" path="res://sprites/tree.png" id="1_j00qk"]
@@ -25,8 +25,11 @@ _data = {
 &"shake": SubResource("Animation_qjmx4")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jelwg"]
+size = Vector2(27, 120)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8ko4"]
-size = Vector2(31, 107)
+size = Vector2(31, 216)
 
 [node name="tree" type="Node2D" node_paths=PackedStringArray("animation")]
 z_index = -20
@@ -46,8 +49,8 @@ libraries = {
 collision_mask = 0
 
 [node name="shape" type="CollisionShape2D" parent="body"]
-position = Vector2(-0.5, -53.5)
-shape = SubResource("RectangleShape2D_d8ko4")
+position = Vector2(-0.5, -60)
+shape = SubResource("RectangleShape2D_jelwg")
 
 [node name="area" type="Area2D" parent="."]
 collision_layer = 0
@@ -55,7 +58,7 @@ collision_mask = 4
 monitorable = false
 
 [node name="shape" type="CollisionShape2D" parent="area"]
-position = Vector2(-0.5, -53.5)
+position = Vector2(-0.5, -108)
 shape = SubResource("RectangleShape2D_d8ko4")
 
 [connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]

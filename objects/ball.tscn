@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1nyk4c13ej5n"]
+[gd_scene load_steps=7 format=3 uid="uid://d1nyk4c13ej5n"]
 
+[ext_resource type="Script" uid="uid://cwb2sr1saji8k" path="res://objects/ball.gd" id="1_3d6a7"]
 [ext_resource type="Texture2D" uid="uid://c8ys5sxco7mdi" path="res://sprites/ball.png" id="1_ball"]
+[ext_resource type="Texture2D" uid="uid://d0x7g52k5y781" path="res://sprites/bum.png" id="2_n16w4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ct1s3"]
 bounce = 0.3
@@ -8,7 +10,18 @@ bounce = 0.3
 [sub_resource type="CircleShape2D" id="CircleShape2D_4k3yw"]
 radius = 8.0
 
-[node name="ball" type="RigidBody2D" groups=["ball"]]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n16w4"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 6.0
+angle_min = -720.0
+angle_max = 720.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.8
+scale_max = 1.1
+
+[node name="ball" type="RigidBody2D" node_paths=PackedStringArray("particles") groups=["ball"]]
 z_index = 10
 collision_layer = 4
 collision_mask = 9
@@ -16,7 +29,10 @@ physics_material_override = SubResource("PhysicsMaterial_ct1s3")
 can_sleep = false
 lock_rotation = true
 continuous_cd = 2
+contact_monitor = true
 max_contacts_reported = 3
+script = ExtResource("1_3d6a7")
+particles = NodePath("bum-particles")
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -24,3 +40,15 @@ texture = ExtResource("1_ball")
 
 [node name="shape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4k3yw")
+
+[node name="bum-particles" type="GPUParticles2D" parent="."]
+z_index = 100
+emitting = false
+amount = 1
+texture = ExtResource("2_n16w4")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_n16w4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
