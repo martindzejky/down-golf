@@ -4,7 +4,9 @@ const SPEED = 160.0
 const JUMP_VELOCITY = -400.0
 const MIN_SHOOT_POWER = 20.0
 const MAX_SHOOT_POWER = 100.0
-const SHOOT_IMPULSE_MULTIPLIER = 20
+const SHOOT_IMPULSE_MULTIPLIER = 15.0
+const SHOOT_UP_DIVISOR = 180.0
+
 # Get the gravity from the project settings to be synced with RigidBody nodes
 var gravity = ProjectSettings.get_setting('physics/2d/default_gravity')
 
@@ -105,6 +107,7 @@ func process_charging_state(delta):
     if shoot_power >= MIN_SHOOT_POWER:
       current_state = State.SHOOTING
       shoot_strength_bar.visible = false
+      animation.play('shooting')
     else:
       current_state = State.READY_TO_SHOOT
       shoot_strength_bar.visible = false
@@ -115,8 +118,7 @@ func process_shooting_state(delta):
   velocity = Vector2.ZERO
   move_and_slide()
 
-  # Play shooting animation
-  animation.play('shooting')
+  # Shooting animation should be playing already
 
 func _on_animation_animation_finished(anim_name: StringName) -> void:
   if anim_name == 'shooting':
@@ -125,9 +127,11 @@ func _on_animation_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_shootarea_body_entered(body: Node2D) -> void:
-  print('shootarea body entered')
-  print(body)
   if body.is_in_group('ball'):
-    var direction = Vector2.RIGHT * flip_node.scale.x + Vector2.UP * (shoot_power / 200.0)
+    var direction = Vector2.RIGHT * flip_node.scale.x + Vector2.UP * (shoot_power / SHOOT_UP_DIVISOR)
     var impulse = direction * shoot_power * SHOOT_IMPULSE_MULTIPLIER
     body.apply_central_impulse(impulse)
+
+    animation.pause()
+    await get_tree().create_timer(0.2).timeout
+    animation.play()
