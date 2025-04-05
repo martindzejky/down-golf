@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1nyk4c13ej5n"]
+[gd_scene load_steps=4 format=3 uid="uid://d1nyk4c13ej5n"]
 
 [ext_resource type="Texture2D" uid="uid://c8ys5sxco7mdi" path="res://sprites/ball.png" id="1_ball"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ct1s3"]
+bounce = 0.3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4k3yw"]
 radius = 8.0
@@ -8,6 +11,8 @@ radius = 8.0
 [node name="ball" type="RigidBody2D" groups=["ball"]]
 z_index = 10
 collision_layer = 4
+collision_mask = 9
+physics_material_override = SubResource("PhysicsMaterial_ct1s3")
 can_sleep = false
 lock_rotation = true
 continuous_cd = 2
