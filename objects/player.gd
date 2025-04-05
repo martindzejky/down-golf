@@ -19,6 +19,7 @@ enum State {
 
 var current_state = State.MOVING
 var shoot_power = 0.0
+var was_in_air = false
 
 @export var flip_node: Node2D
 @export var animation: AnimationPlayer
@@ -26,6 +27,13 @@ var shoot_power = 0.0
 @export var shoot_strength_bar: ProgressBar
 @export var pow: Sprite2D
 @export var shoot_area_shape: CollisionShape2D
+
+@export var swing_hit_sound: AudioStreamPlayer
+@export var swing_small_sound: AudioStreamPlayer
+@export var swing_large_sound: AudioStreamPlayer
+@export var jump_sound: AudioStreamPlayer
+@export var land_sound: AudioStreamPlayer
+@export var ready_to_shoot_sound: AudioStreamPlayer
 
 func _physics_process(delta):
   process_state_machine(delta)
@@ -49,6 +57,7 @@ func process_moving_state(delta):
   # Handle jump
   if Input.is_action_just_pressed('jump') and is_on_floor():
     velocity.y = JUMP_VELOCITY
+    jump_sound.play()
 
   # Get the input direction and handle the movement/deceleration
   var direction = Input.get_axis('move_left', 'move_right')
@@ -63,10 +72,15 @@ func process_moving_state(delta):
 
   # Update animation
   if not is_on_floor():
+    was_in_air = true
     if velocity.y < 0:
       animation.play('jump')
     else:
       animation.play('falling')
+  elif was_in_air:
+    was_in_air = false
+    land_sound.play()
+    animation.play('idle')
   elif abs(velocity.x) > 0.1:
     animation.play('run')
   else:
@@ -75,6 +89,7 @@ func process_moving_state(delta):
   # Check for state transition
   if Input.is_action_just_pressed('shoot') and is_on_floor():
     current_state = State.READY_TO_SHOOT
+    ready_to_shoot_sound.play()
 
 func process_ready_to_shoot_state(delta):
   # Stop all movement
@@ -88,6 +103,7 @@ func process_ready_to_shoot_state(delta):
   if Input.is_action_just_pressed('shoot'):
     current_state = State.CHARGING
     shoot_power = 0.0
+    swing_small_sound.play()
   # Go back to moving if any movement input is pressed
   elif Input.is_action_pressed('move_left') or Input.is_action_pressed('move_right') or Input.is_action_pressed('jump'):
     current_state = State.MOVING
@@ -110,6 +126,7 @@ func process_charging_state(delta):
   # Check for state transitions
   if not Input.is_action_pressed('shoot'):
     if shoot_power >= MIN_SHOOT_POWER:
+      swing_large_sound.play()
       current_state = State.SHOOTING
       shoot_strength_bar.visible = false
       animation.play('shooting')
@@ -141,6 +158,7 @@ func _on_shootarea_body_entered(body: Node2D) -> void:
 
     animation.pause()
     pow.visible = true
+    swing_hit_sound.play()
     await get_tree().create_timer(0.2).timeout
     animation.play()
     pow.visible = false

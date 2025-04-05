@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1nyk4c13ej5n"]
+[gd_scene load_steps=11 format=3 uid="uid://d1nyk4c13ej5n"]
 
 [ext_resource type="Script" uid="uid://cwb2sr1saji8k" path="res://objects/ball.gd" id="1_3d6a7"]
 [ext_resource type="Texture2D" uid="uid://c8ys5sxco7mdi" path="res://sprites/ball.png" id="1_ball"]
 [ext_resource type="Texture2D" uid="uid://d0x7g52k5y781" path="res://sprites/bum.png" id="2_n16w4"]
+[ext_resource type="AudioStream" uid="uid://yf72x0umb8yx" path="res://sounds/hit1.wav" id="4_tlu46"]
+[ext_resource type="AudioStream" uid="uid://p4a5uti03f2q" path="res://sounds/hit2.wav" id="5_75cf2"]
+[ext_resource type="AudioStream" uid="uid://bqpkbq16ujadw" path="res://sounds/hit3.wav" id="6_b6iv5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ct1s3"]
 bounce = 0.3
@@ -21,7 +24,14 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.8
 scale_max = 1.1
 
-[node name="ball" type="RigidBody2D" node_paths=PackedStringArray("particles") groups=["ball"]]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3d6a7"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("4_tlu46")
+stream_1/stream = ExtResource("5_75cf2")
+stream_2/stream = ExtResource("6_b6iv5")
+
+[node name="ball" type="RigidBody2D" node_paths=PackedStringArray("particles", "hit_sound") groups=["ball"]]
 z_index = 10
 collision_layer = 4
 collision_mask = 9
@@ -33,6 +43,7 @@ contact_monitor = true
 max_contacts_reported = 3
 script = ExtResource("1_3d6a7")
 particles = NodePath("bum-particles")
+hit_sound = NodePath("hit")
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -50,5 +61,9 @@ lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_n16w4")
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_3d6a7")
+bus = &"ball sounds"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
