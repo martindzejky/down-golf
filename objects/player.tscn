@@ -186,7 +186,7 @@ _data = {
 &"shooting": SubResource("Animation_shooting")
 }
 
-[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("flip_node", "animation", "sprite", "shoot_strength_bar", "pow") groups=["player"]]
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("flip_node", "animation", "sprite", "shoot_strength_bar", "pow", "shoot_area_shape") groups=["player"]]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_ykyjo")
@@ -195,6 +195,7 @@ animation = NodePath("animation")
 sprite = NodePath("flip/sprite")
 shoot_strength_bar = NodePath("shoot-strength")
 pow = NodePath("pow")
+shoot_area_shape = NodePath("flip/shoot-area/shape")
 
 [node name="flip" type="Node2D" parent="."]
 

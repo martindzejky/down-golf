@@ -25,6 +25,7 @@ var shoot_power = 0.0
 @export var sprite: Sprite2D
 @export var shoot_strength_bar: ProgressBar
 @export var pow: Sprite2D
+@export var shoot_area_shape: CollisionShape2D
 
 func _physics_process(delta):
   process_state_machine(delta)
@@ -136,8 +137,13 @@ func _on_shootarea_body_entered(body: Node2D) -> void:
     var impulse = direction * shoot_power * SHOOT_IMPULSE_MULTIPLIER
     body.apply_central_impulse(impulse)
 
+    call_deferred('disable_shoot_area')
+
     animation.pause()
     pow.visible = true
     await get_tree().create_timer(0.2).timeout
     animation.play()
     pow.visible = false
+
+func disable_shoot_area() -> void:
+  shoot_area_shape.disabled = true
