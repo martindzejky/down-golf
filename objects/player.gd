@@ -61,7 +61,10 @@ func process_moving_state(delta):
 
   # Update animation
   if not is_on_floor():
-    animation.play('jump')
+    if velocity.y < 0:
+      animation.play('jump')
+    else:
+      animation.play('falling')
   elif abs(velocity.x) > 0.1:
     animation.play('run')
   else:
