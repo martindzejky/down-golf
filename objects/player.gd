@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 160.0
 const JUMP_VELOCITY = -400.0
-const MIN_SHOOT_POWER = 20.0
+const MIN_SHOOT_POWER = 10.0
 const MAX_SHOOT_POWER = 100.0
 const SHOOT_IMPULSE_MULTIPLIER = 15.0
 const SHOOT_UP_DIVISOR = 180.0
