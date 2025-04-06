@@ -130,7 +130,7 @@ gravity_space_override = 1
 gravity_point = true
 gravity_point_center = Vector2(0, 0)
 gravity_direction = Vector2(0, 0)
-gravity = 300.0
+gravity = 150.0
 
 [node name="shape" type="CollisionShape2D" parent="attract"]
 shape = SubResource("CircleShape2D_8k6g0")
