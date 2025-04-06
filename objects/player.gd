@@ -43,6 +43,7 @@ var aim_direction = 1.0  # 1 for increasing, -1 for decreasing
 @export var jump_sound: AudioStreamPlayer
 @export var land_sound: AudioStreamPlayer
 @export var ready_to_shoot_sound: AudioStreamPlayer
+@export var charging_sound: AudioStreamPlayer
 
 func _physics_process(delta):
   process_state_machine(delta)
@@ -144,6 +145,7 @@ func process_ready_to_shoot_state(delta):
   # Check for state transitions
   if Input.is_action_just_pressed('shoot'):
     current_state = State.CHARGING
+    charging_sound.play()
     shoot_power = 0.0
     swing_small_sound.play()
   # Go back to moving if any movement input is pressed
@@ -165,7 +167,12 @@ func process_charging_state(delta):
   move_and_slide()
 
   # Increase power while charging
-  shoot_power = min(shoot_power + delta * 50.0, MAX_SHOOT_POWER)
+  shoot_power = shoot_power + delta * 50.0
+  if shoot_power > MAX_SHOOT_POWER:
+    current_state = State.READY_TO_SHOOT
+    shoot_strength_bar.visible = false
+    shoot_power = 0.0
+    charging_sound.stop()
 
   # Play charging animation
   animation.play('charging')
@@ -178,10 +185,12 @@ func process_charging_state(delta):
       shoot_strength_bar.visible = false
       animation.play('shooting')
       aim_arrow.visible = false
+      charging_sound.stop()
     else:
       current_state = State.READY_TO_SHOOT
       shoot_strength_bar.visible = false
       shoot_power = 0.0
+      charging_sound.stop()
 
 func process_shooting_state(delta):
   # Stop all movement

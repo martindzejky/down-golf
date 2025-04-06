@@ -66,6 +66,7 @@ process_material = SubResource("ParticleProcessMaterial_n16w4")
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_3d6a7")
+max_distance = 1500.0
 bus = &"ball sounds"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
