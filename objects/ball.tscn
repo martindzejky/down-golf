@@ -35,7 +35,6 @@ stream_2/stream = ExtResource("6_b6iv5")
 [node name="ball" type="RigidBody2D" node_paths=PackedStringArray("particles", "hit_sound") groups=["ball"]]
 z_index = 10
 collision_layer = 4
-collision_mask = 9
 physics_material_override = SubResource("PhysicsMaterial_ct1s3")
 can_sleep = false
 continuous_cd = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://y5nnkqj2u5wb"]
+[gd_scene load_steps=11 format=4 uid="uid://y5nnkqj2u5wb"]
 
 [ext_resource type="TileSet" uid="uid://dkvtpbgcxc1ia" path="res://levels/tiles.tres" id="1_ai0rc"]
 [ext_resource type="PackedScene" uid="uid://dxq1t72tlug6j" path="res://objects/tree.tscn" id="2_f2oph"]
@@ -16,6 +16,9 @@ fill_from = Vector2(1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_53cg5"]
 size = Vector2(549, 370)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e70m4"]
+size = Vector2(20, 350)
 
 [node name="surface_level" type="Node2D"]
 
@@ -49,9 +52,16 @@ position = Vector2(304, 0)
 position = Vector2(200, 0)
 
 [node name="shape" parent="camera_bounds" index="0"]
-visible = false
 position = Vector2(34.5, -158)
 shape = SubResource("RectangleShape2D_53cg5")
+
+[node name="player_bounds" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="player_bounds"]
+position = Vector2(-45, -165)
+shape = SubResource("RectangleShape2D_e70m4")
 
 [connection signal="player_entered_pole" from="pole" to="activator" method="deactivate"]
 
