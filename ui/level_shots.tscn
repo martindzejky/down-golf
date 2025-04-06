@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu4gh4l7edsjq"]
+
+[ext_resource type="Script" uid="uid://bv6ab1224wtkf" path="res://ui/level_shots.gd" id="1_b3lnx"]
+[ext_resource type="Texture2D" uid="uid://bcgxvefpi7p6a" path="res://sprites/pole_icon.png" id="1_lwkkf"]
+
+[node name="level_shots" type="HBoxContainer" node_paths=PackedStringArray("label")]
+script = ExtResource("1_b3lnx")
+label = NodePath("label")
+
+[node name="icon" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_lwkkf")
+stretch_mode = 3
+
+[node name="label" type="Label" parent="."]
+layout_mode = 2
+text = "Level 1: 0"
