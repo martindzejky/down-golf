@@ -10,6 +10,8 @@ const SHOOT_IMPULSE_MULTIPLIER_X = 15.0
 const SHOOT_IMPULSE_MULTIPLIER_Y = 30.0
 const AIM_SPEED = 100.0
 
+signal ball_hit
+
 # Get the gravity from the project settings to be synced with RigidBody nodes
 var gravity = ProjectSettings.get_setting('physics/2d/default_gravity')
 
@@ -223,6 +225,7 @@ func _on_shootarea_body_entered(body: Node2D) -> void:
 
     body.apply_central_impulse(impulse)
 
+    emit_signal('ball_hit')
     call_deferred('disable_shoot_area')
 
     animation.pause()

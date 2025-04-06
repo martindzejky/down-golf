@@ -39,6 +39,13 @@ player="The main player"
 ball="The one and only ball in the game"
 pole="Hit it!"
 
+[gui]
+
+theme/custom_font="uid://b2v7ixfoxmshv"
+theme/default_font_antialiasing=0
+theme/default_font_hinting=0
+theme/default_font_subpixel_positioning=0
+
 [input]
 
 move_left={

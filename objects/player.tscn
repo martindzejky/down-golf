@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://r3wp4bjkcas0"]
+[gd_scene load_steps=32 format=3 uid="uid://r3wp4bjkcas0"]
 
 [ext_resource type="Texture2D" uid="uid://co3au8m4vt65v" path="res://sprites/player.png" id="1_eqqp1"]
 [ext_resource type="Script" uid="uid://qpxfwcicddny" path="res://objects/player.gd" id="1_ykyjo"]
@@ -212,6 +212,20 @@ _data = {
 &"shooting": SubResource("Animation_shooting")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqq2l"]
+bg_color = Color(0.352941, 0.411765, 0.533333, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42cpl"]
+bg_color = Color(0.886275, 0.239216, 0.411765, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3rerk"]
 random_pitch = 1.1
 streams_count = 1
@@ -309,6 +323,8 @@ offset_right = 10.0
 offset_bottom = -65.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_vqq2l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_42cpl")
 show_percentage = false
 
 [node name="pow" type="Sprite2D" parent="."]

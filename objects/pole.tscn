@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bi3lro6q2ffel"]
+[gd_scene load_steps=24 format=3 uid="uid://bi3lro6q2ffel"]
 
 [ext_resource type="Script" uid="uid://bin3k4j6t1g1s" path="res://objects/pole.gd" id="1_8k6g0"]
 [ext_resource type="Texture2D" uid="uid://bj8go8hv1hgkk" path="res://sprites/pole.png" id="1_etow4"]
@@ -30,6 +30,9 @@ animations = [{
 "name": &"default",
 "speed": 6.0
 }]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ljcih"]
+font_size = 12
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_etow4"]
 size = Vector2(16, 8)
@@ -111,7 +114,7 @@ streams_count = 2
 stream_0/stream = ExtResource("7_ljcih")
 stream_1/stream = ExtResource("8_j21id")
 
-[node name="pole" type="Node2D" node_paths=PackedStringArray("player_blocker", "ground_sprite", "particles", "particles2", "animation") groups=["pole"]]
+[node name="pole" type="Node2D" node_paths=PackedStringArray("player_blocker", "ground_sprite", "particles", "particles2", "animation", "hits_number_label") groups=["pole"]]
 z_index = -5
 script = ExtResource("1_8k6g0")
 player_blocker = NodePath("player_blocker")
@@ -119,6 +122,7 @@ ground_sprite = NodePath("ground")
 particles = NodePath("particles")
 particles2 = NodePath("particles2")
 animation = NodePath("animation")
+hits_number_label = NodePath("rotation_animation/sprite/hits_number")
 
 [node name="rotation_animation" type="Node2D" parent="."]
 
@@ -127,6 +131,15 @@ position = Vector2(7, -74)
 sprite_frames = SubResource("SpriteFrames_eq50a")
 autoplay = "default"
 frame_progress = 0.522457
+
+[node name="hits_number" type="Label" parent="rotation_animation/sprite"]
+offset_left = -3.0
+offset_top = -55.0
+offset_right = 8.0
+offset_bottom = -40.0
+text = "0"
+label_settings = SubResource("LabelSettings_ljcih")
+vertical_alignment = 1
 
 [node name="detect" type="Area2D" parent="."]
 collision_layer = 0
@@ -201,7 +214,7 @@ stream = SubResource("AudioStreamRandomizer_r8tcx")
 max_distance = 1500.0
 bus = &"pole sounds"
 
-[connection signal="ball_entered_hole" from="." to="falling_hole" method="play"]
 [connection signal="ball_entered_hole" from="." to="honk" method="play"]
+[connection signal="ball_entered_hole" from="." to="falling_hole" method="play"]
 [connection signal="player_entered_pole" from="." to="falling_hole" method="play"]
 [connection signal="body_entered" from="detect" to="." method="_on_balldetect_body_entered"]
