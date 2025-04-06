@@ -5,8 +5,6 @@ extends Node2D
 @export var camera_scene: PackedScene
 
 func _ready():
-  print('test spawner ready')
-
   # Check if player exists already
   if get_tree().get_nodes_in_group('player').size() == 0:
     # Spawn player

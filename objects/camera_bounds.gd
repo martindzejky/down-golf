@@ -4,8 +4,6 @@ class_name CameraBounds
 @export var shape: CollisionShape2D
 
 func activate() -> void:
-  print('camera bounds activate')
-
   # Get current camera (usually from viewport)
   var camera = get_viewport().get_camera_2d()
 
