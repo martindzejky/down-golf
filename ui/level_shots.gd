@@ -26,12 +26,4 @@ func update_label_text():
   label.text = level_name + ': ' + str(shots)
 
 func process_level_name(level_name_to_process: String):
-  # Replace underscores with spaces and add space before numbers
-  var processed_name = level_name_to_process.replace('_', ' ')
-
-  # Use regex to add a space before numbers
-  var regex = RegEx.new()
-  regex.compile('([a-zA-Z])([0-9])')
-  processed_name = regex.sub(processed_name, '$1 $2')
-
-  return processed_name.capitalize()
+  return level_name_to_process.replace('_', ' ').capitalize()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://k2lmsrpttbia"]
+[gd_scene load_steps=7 format=4 uid="uid://bb7qgw1ullq8g"]
 
 [ext_resource type="PackedScene" uid="uid://dq0i2bmd7bnf7" path="res://objects/test_spawner.tscn" id="1_g1dg4"]
 [ext_resource type="PackedScene" uid="uid://boka27sfxwwg2" path="res://objects/level_activator.tscn" id="2_s1bpp"]
@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ua5ty"]
 size = Vector2(496, 336)
 
-[node name="level1" type="Node2D"]
+[node name="underground_level_1" type="Node2D"]
 
 [node name="spawner" parent="." instance=ExtResource("1_g1dg4")]
 position = Vector2(16, 24)
