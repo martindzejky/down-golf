@@ -1,4 +1,5 @@
 extends Node2D
+class_name TestSpawner
 
 @export var player_scene: PackedScene
 @export var ball_scene: PackedScene

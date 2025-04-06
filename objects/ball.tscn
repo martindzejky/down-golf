@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://bqpkbq16ujadw" path="res://sounds/hit3.wav" id="6_b6iv5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ct1s3"]
+friction = 0.7
 bounce = 0.3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4k3yw"]

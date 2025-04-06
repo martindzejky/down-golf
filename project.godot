@@ -21,6 +21,10 @@ boot_splash/image="uid://b826vxpufkqdm"
 config/icon="uid://b826vxpufkqdm"
 boot_splash/minimum_display_time=1000
 
+[autoload]
+
+ClearColor="*res://autoload/clear_color.gd"
+
 [display]
 
 window/size/viewport_width=1200
