@@ -1,6 +1,7 @@
 extends Camera2D
 
-const POLE_CONSIDERATION_DISTANCE = 600
+const POLE_CONSIDERATION_DISTANCE = 1200
+const PLAYER_VIEW_MARGIN = 150
 
 var player: Node2D
 var ball: Node2D
@@ -11,9 +12,6 @@ func _ready():
   ball = get_tree().get_first_node_in_group('ball')
 
 func _process(_delta):
-  if not player or not ball:
-    return
-
   # Find the current pole
   var poles = get_tree().get_nodes_in_group('pole')
   var current_pole = null
@@ -40,7 +38,7 @@ func _process(_delta):
 
   # Calculate max distance from player to keep them in view (half viewport minus margin)
   # The margin is also scaled by zoom
-  var margin = 150 / zoom.x  # pixels from edge of screen, adjusted for zoom
+  var margin = PLAYER_VIEW_MARGIN / zoom.x  # pixels from edge of screen, adjusted for zoom
   var max_distance = world_viewport_size / 2 - Vector2(margin, margin)
 
   # Clamp camera position relative to player
