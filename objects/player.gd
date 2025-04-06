@@ -6,7 +6,8 @@ const JUMP_MIN_VELOCITY = -20.0
 const JUMP_MAX_VELOCITY = -35.0
 const MIN_SHOOT_POWER = 10.0
 const MAX_SHOOT_POWER = 100.0
-const SHOOT_IMPULSE_MULTIPLIER = 40.0
+const SHOOT_IMPULSE_MULTIPLIER_X = 25.0
+const SHOOT_IMPULSE_MULTIPLIER_Y = 40.0
 const AIM_SPEED = 100.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes
@@ -213,7 +214,13 @@ func _on_shootarea_body_entered(body: Node2D) -> void:
     var rad_angle = deg_to_rad(-aim_angle)
     # When facing left, we need to flip the x component of the direction
     var direction = Vector2(cos(rad_angle) * flip_node.scale.x, -sin(rad_angle))
-    var impulse = direction * shoot_power * SHOOT_IMPULSE_MULTIPLIER
+
+    # Apply different multipliers for X and Y to compensate for gravity
+    var impulse = Vector2(
+      direction.x * shoot_power * SHOOT_IMPULSE_MULTIPLIER_X,
+      direction.y * shoot_power * SHOOT_IMPULSE_MULTIPLIER_Y
+    )
+
     body.apply_central_impulse(impulse)
 
     call_deferred('disable_shoot_area')
