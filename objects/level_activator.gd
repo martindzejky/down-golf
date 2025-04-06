@@ -1,4 +1,5 @@
 extends Node
+class_name LevelActivator
 
 @export var pole: Pole
 @export var camera_bounds: CameraBounds

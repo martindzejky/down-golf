@@ -33,6 +33,6 @@ visible = false
 position = Vector2(-96, 144)
 shape = SubResource("RectangleShape2D_ua5ty")
 
-[connection signal="ball_entered_hole" from="pole" to="activator" method="deactivate"]
+[connection signal="player_entered_pole" from="pole" to="activator" method="deactivate"]
 
 [editable path="camera_bounds"]

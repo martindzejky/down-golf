@@ -1,22 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfwkuxfg1oa"]
+[gd_scene load_steps=8 format=3 uid="uid://dfwkuxfg1oa"]
 
 [ext_resource type="PackedScene" uid="uid://bpc2udtuklk7v" path="res://objects/camera.tscn" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://r3wp4bjkcas0" path="res://objects/player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://drtc2w32yxa3e" path="res://main.gd" id="1_lquwl"]
 [ext_resource type="PackedScene" uid="uid://d1nyk4c13ej5n" path="res://objects/ball.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://y5nnkqj2u5wb" path="res://levels/surface_level.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://k2lmsrpttbia" path="res://levels/level1.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://cnbx5oq18q7kw" path="res://levels/level2.tscn" id="7_272bh"]
 
-[node name="main" type="Node"]
+[node name="main" type="Node" node_paths=PackedStringArray("first_level_activator")]
+script = ExtResource("1_lquwl")
+first_level_activator = NodePath("surface_level/activator")
 
 [node name="camera" parent="." instance=ExtResource("1_1bvp3")]
 
 [node name="player" parent="." instance=ExtResource("1_ig7tw")]
 
 [node name="ball" parent="." instance=ExtResource("2_h2yge")]
-position = Vector2(111, -46)
+position = Vector2(111, -235)
 
 [node name="surface_level" parent="." instance=ExtResource("4_1bvp3")]
 
-[node name="pole" parent="surface_level" index="3"]
-is_current = true
+[node name="level1" parent="." instance=ExtResource("6_7mycd")]
+position = Vector2(288, 224)
+
+[node name="level2" parent="." instance=ExtResource("7_272bh")]
+position = Vector2(0, 704)
+
+[connection signal="player_entered_pole" from="surface_level/pole" to="level1/activator" method="activate"]
+[connection signal="player_entered_pole" from="level1/pole" to="level2/activator" method="activate"]
 
 [editable path="surface_level"]
+[editable path="surface_level/camera_bounds"]
+[editable path="level1"]
+[editable path="level1/camera_bounds"]
+[editable path="level2"]
+[editable path="level2/camera_bounds"]
