@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bi3lro6q2ffel"]
+[gd_scene load_steps=14 format=3 uid="uid://bi3lro6q2ffel"]
 
 [ext_resource type="Script" uid="uid://bin3k4j6t1g1s" path="res://objects/pole.gd" id="1_8k6g0"]
 [ext_resource type="Texture2D" uid="uid://bj8go8hv1hgkk" path="res://sprites/pole.png" id="1_etow4"]
+[ext_resource type="Texture2D" uid="uid://dacgkaoqv82tt" path="res://sprites/tiles.png" id="3_vvshh"]
+[ext_resource type="Texture2D" uid="uid://dxekvidi0dao1" path="res://sprites/ground_blob.png" id="4_qm5ri"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_etow4"]
 atlas = ExtResource("1_etow4")
@@ -34,10 +36,34 @@ radius = 25.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8k6g0"]
 size = Vector2(32, 20)
 
-[node name="pole" type="Node2D" node_paths=PackedStringArray("player_blocker") groups=["pole"]]
+[sub_resource type="Curve" id="Curve_qm5ri"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.946789, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -53.7201, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3e2jp"]
+curve = SubResource("Curve_qm5ri")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qm5ri"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(12, 12, 1)
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 0.1
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.8
+scale_curve = SubResource("CurveTexture_3e2jp")
+color = Color(1, 1, 1, 0.662745)
+
+[node name="pole" type="Node2D" node_paths=PackedStringArray("player_blocker", "ground_sprite", "particles") groups=["pole"]]
 z_index = -5
 script = ExtResource("1_8k6g0")
 player_blocker = NodePath("player_blocker")
+ground_sprite = NodePath("ground")
+particles = NodePath("particles")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(7, -74)
@@ -73,5 +99,22 @@ collision_mask = 0
 [node name="shape" type="CollisionShape2D" parent="player_blocker"]
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_8k6g0")
+
+[node name="ground" type="Sprite2D" parent="."]
+position = Vector2(0, 58)
+scale = Vector2(1, 3)
+texture = ExtResource("3_vvshh")
+region_enabled = true
+region_rect = Rect2(64, 0, 32, 32)
+
+[node name="particles" type="GPUParticles2D" parent="."]
+position = Vector2(0, 16)
+emitting = false
+texture = ExtResource("4_qm5ri")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_qm5ri")
 
 [connection signal="body_entered" from="detect" to="." method="_on_balldetect_body_entered"]
