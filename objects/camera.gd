@@ -1,6 +1,6 @@
 extends Camera2D
 
-const POLE_CONSIDERATION_DISTANCE = 1200
+const POLE_CONSIDERATION_DISTANCE = 800
 const PLAYER_VIEW_MARGIN = 150
 
 var player: Node2D

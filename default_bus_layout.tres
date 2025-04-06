@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://bywbw3pw5fkco"]
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://bywbw3pw5fkco"]
 
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_g28q7"]
 resource_name = "Amplify"
@@ -9,6 +9,10 @@ resource_name = "Amplify"
 volume_db = 12.0
 
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_n8wo2"]
+resource_name = "Amplify"
+volume_db = 10.0
+
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_5t1r3"]
 resource_name = "Amplify"
 volume_db = 10.0
 
@@ -37,3 +41,11 @@ bus/3/volume_db = 0.0
 bus/3/send = &"Master"
 bus/3/effect/0/effect = SubResource("AudioEffectAmplify_n8wo2")
 bus/3/effect/0/enabled = true
+bus/4/name = &"trampoline sounds"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = &"Master"
+bus/4/effect/0/effect = SubResource("AudioEffectAmplify_5t1r3")
+bus/4/effect/0/enabled = true
