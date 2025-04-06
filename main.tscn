@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfwkuxfg1oa"]
+[gd_scene load_steps=9 format=3 uid="uid://dfwkuxfg1oa"]
 
 [ext_resource type="PackedScene" uid="uid://bpc2udtuklk7v" path="res://objects/camera.tscn" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://r3wp4bjkcas0" path="res://objects/player.tscn" id="1_ig7tw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://y5nnkqj2u5wb" path="res://levels/surface_level.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://k2lmsrpttbia" path="res://levels/level1.tscn" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://cnbx5oq18q7kw" path="res://levels/level2.tscn" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://dqo0gdugeaf0x" path="res://levels/level3.tscn" id="8_5vw27"]
 
 [node name="main" type="Node" node_paths=PackedStringArray("first_level_activator")]
 script = ExtResource("1_lquwl")
@@ -27,8 +28,12 @@ position = Vector2(288, 224)
 [node name="level2" parent="." instance=ExtResource("7_272bh")]
 position = Vector2(0, 704)
 
+[node name="level3" parent="." instance=ExtResource("8_5vw27")]
+position = Vector2(-288, 1184)
+
 [connection signal="player_entered_pole" from="surface_level/pole" to="level1/activator" method="activate"]
 [connection signal="player_entered_pole" from="level1/pole" to="level2/activator" method="activate"]
+[connection signal="player_entered_pole" from="level2/pole" to="level3/activator" method="activate"]
 
 [editable path="surface_level"]
 [editable path="surface_level/camera_bounds"]
@@ -37,3 +42,6 @@ position = Vector2(0, 704)
 [editable path="level2"]
 [editable path="level2/pole"]
 [editable path="level2/camera_bounds"]
+[editable path="level3"]
+[editable path="level3/pole"]
+[editable path="level3/camera_bounds"]
