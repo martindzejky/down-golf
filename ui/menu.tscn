@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2rj8ibqg7pqw"]
+
+[ext_resource type="Texture2D" uid="uid://bv85e0nqd5rpq" path="res://sprites/logo.png" id="1_bwjgb"]
+[ext_resource type="Script" uid="uid://dgxyi83id5yrl" path="res://ui/menu.gd" id="1_udkah"]
+
+[node name="menu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_udkah")
+
+[node name="panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="container" type="VBoxContainer" parent="panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="logo_margin" type="MarginContainer" parent="panel/container"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="logo_center" type="CenterContainer" parent="panel/container/logo_margin"]
+layout_mode = 2
+
+[node name="sprite" type="TextureRect" parent="panel/container/logo_margin/logo_center"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_bwjgb")
+
+[node name="levels" type="MarginContainer" parent="panel/container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="flow" type="HFlowContainer" parent="panel/container/levels"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="buttons_margin" type="MarginContainer" parent="panel/container"]
+layout_mode = 2
+
+[node name="buttons" type="HBoxContainer" parent="panel/container/buttons_margin"]
+layout_mode = 2
+alignment = 1
+
+[node name="restart" type="Button" parent="panel/container/buttons_margin/buttons"]
+layout_mode = 2
+text = "Restart"
+
+[node name="quit" type="Button" parent="panel/container/buttons_margin/buttons"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="panel/container/buttons_margin/buttons/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="panel/container/buttons_margin/buttons/quit" to="." method="_on_quit_pressed"]

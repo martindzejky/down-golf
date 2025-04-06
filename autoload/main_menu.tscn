@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsrvf83mvpt30"]
+
+[ext_resource type="Script" uid="uid://cea4fyo2i54k" path="res://autoload/main_menu.gd" id="1_5adwk"]
+[ext_resource type="PackedScene" uid="uid://b2rj8ibqg7pqw" path="res://ui/menu.tscn" id="2_xwdye"]
+
+[node name="main_menu" type="Node" node_paths=PackedStringArray("menu")]
+process_mode = 3
+script = ExtResource("1_5adwk")
+menu = NodePath("menu")
+
+[node name="menu" parent="." instance=ExtResource("2_xwdye")]
+visible = false
+
+[connection signal="pressed" from="menu/full/buttons_margin/buttons/restart" to="." method="_on_restart_pressed"]
+
+[editable path="menu"]

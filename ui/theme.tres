@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bhif2bgbg412r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_denks"]
+content_margin_left = 32.0
+content_margin_top = 16.0
+content_margin_right = 32.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqugq"]
+bg_color = Color(0, 0, 0, 0.486275)
+
+[resource]
+BoxContainer/constants/separation = 16
+Button/styles/normal = SubResource("StyleBoxFlat_denks")
+FlowContainer/constants/h_separation = 16
+FlowContainer/constants/v_separation = 16
+MarginContainer/constants/margin_bottom = 16
+MarginContainer/constants/margin_left = 16
+MarginContainer/constants/margin_right = 16
+MarginContainer/constants/margin_top = 16
+Panel/styles/panel = SubResource("StyleBoxFlat_rqugq")
