@@ -35,4 +35,5 @@ position = Vector2(0, 704)
 [editable path="level1"]
 [editable path="level1/camera_bounds"]
 [editable path="level2"]
+[editable path="level2/pole"]
 [editable path="level2/camera_bounds"]

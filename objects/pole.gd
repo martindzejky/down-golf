@@ -6,6 +6,7 @@ class_name Pole
 @export var player_blocker: Node2D
 @export var ground_sprite: Sprite2D
 @export var particles: GPUParticles2D
+@export var particles2: GPUParticles2D
 @export var animation: AnimationPlayer
 
 signal ball_entered_hole
@@ -23,6 +24,7 @@ func make_done() -> void:
   is_done = true
   ground_sprite.visible = false
   particles.emitting = true
+  particles2.emitting = true
   animation.play('shake')
 
 func _on_balldetect_body_entered(body: Node2D) -> void:
