@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxq1t72tlug6j"]
+[gd_scene load_steps=9 format=3 uid="uid://dxq1t72tlug6j"]
 
 [ext_resource type="Script" uid="uid://b5t7l065iqa2" path="res://objects/tree.gd" id="1_d8ko4"]
 [ext_resource type="Texture2D" uid="uid://dnxlucabod1c8" path="res://sprites/tree.png" id="1_j00qk"]
+[ext_resource type="Texture2D" uid="uid://b5rbt64trp68x" path="res://sprites/leaf.png" id="3_jelwg"]
 
 [sub_resource type="Animation" id="Animation_qjmx4"]
 resource_name = "shake"
@@ -31,10 +32,26 @@ size = Vector2(27, 120)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8ko4"]
 size = Vector2(31, 216)
 
-[node name="tree" type="Node2D" node_paths=PackedStringArray("animation")]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jelwg"]
+lifetime_randomness = 0.6
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 70.0
+angle_min = -20.0
+angle_max = 20.0
+direction = Vector3(0, 1, 0)
+spread = 1.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.3
+
+[node name="tree" type="Node2D" node_paths=PackedStringArray("animation", "particles")]
 z_index = -20
 script = ExtResource("1_d8ko4")
 animation = NodePath("animation")
+particles = NodePath("leaves")
 
 [node name="sprite" type="Sprite2D" parent="."]
 position = Vector2(0, -110)
@@ -60,5 +77,16 @@ monitorable = false
 [node name="shape" type="CollisionShape2D" parent="area"]
 position = Vector2(-0.5, -108)
 shape = SubResource("RectangleShape2D_d8ko4")
+
+[node name="leaves" type="GPUParticles2D" parent="."]
+position = Vector2(1, -155)
+emitting = false
+amount = 60
+texture = ExtResource("3_jelwg")
+lifetime = 4.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.3
+process_material = SubResource("ParticleProcessMaterial_jelwg")
 
 [connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]
