@@ -11,3 +11,8 @@ Down Golf combines platforming mechanics with golf gameplay. Players must naviga
 - [Godot](https://godotengine.org/) game engine
 - [Aseprite](https://www.aseprite.org/) for graphics
 - My own sound effects
+
+## Downloads
+
+- Play online at [Itch.io](https://martindzejky.itch.io/down-golf)
+- Download from [GitHub Releases](https://github.com/martindzejky/down-golf/releases)
