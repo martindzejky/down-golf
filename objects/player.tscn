@@ -242,7 +242,7 @@ stream_0/stream = ExtResource("9_4vq5b")
 
 [node name="player" type="CharacterBody2D" node_paths=PackedStringArray("flip_node", "animation", "sprite", "shoot_strength_bar", "pow", "shoot_area_shape", "swing_hit_sound", "swing_small_sound", "swing_large_sound", "jump_sound", "land_sound", "ready_to_shoot_sound") groups=["player"]]
 collision_layer = 2
-collision_mask = 9
+collision_mask = 25
 script = ExtResource("1_ykyjo")
 flip_node = NodePath("flip")
 animation = NodePath("animation")
