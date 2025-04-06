@@ -11,6 +11,6 @@ menu = NodePath("menu")
 [node name="menu" parent="." instance=ExtResource("2_xwdye")]
 visible = false
 
-[connection signal="pressed" from="menu/full/buttons_margin/buttons/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="menu/panel/container/buttons_margin/buttons/restart" to="." method="_on_restart_pressed"]
 
 [editable path="menu"]

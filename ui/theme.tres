@@ -1,4 +1,9 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bhif2bgbg412r"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bhif2bgbg412r"]
+
+[ext_resource type="FontFile" uid="uid://b2v7ixfoxmshv" path="res://font/pixelated_elegance.ttf" id="1_rqugq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jf26r"]
+bg_color = Color(0.337898, 0.16293, 0.218705, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_denks"]
 content_margin_left = 32.0
@@ -11,7 +16,10 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(0, 0, 0, 0.486275)
 
 [resource]
+default_font = ExtResource("1_rqugq")
+default_font_size = 20
 BoxContainer/constants/separation = 16
+Button/styles/hover = SubResource("StyleBoxFlat_jf26r")
 Button/styles/normal = SubResource("StyleBoxFlat_denks")
 FlowContainer/constants/h_separation = 16
 FlowContainer/constants/v_separation = 16
