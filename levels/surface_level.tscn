@@ -1,12 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://y5nnkqj2u5wb"]
+[gd_scene load_steps=7 format=4 uid="uid://y5nnkqj2u5wb"]
 
 [ext_resource type="TileSet" uid="uid://dkvtpbgcxc1ia" path="res://levels/tiles.tres" id="1_ai0rc"]
 [ext_resource type="PackedScene" uid="uid://dxq1t72tlug6j" path="res://objects/tree.tscn" id="2_f2oph"]
 [ext_resource type="PackedScene" uid="uid://bi3lro6q2ffel" path="res://objects/pole.tscn" id="3_em6x7"]
-[ext_resource type="Script" uid="uid://bar7m17x8ic8x" path="res://levels/test_spawner.gd" id="4_f2oph"]
-[ext_resource type="PackedScene" uid="uid://r3wp4bjkcas0" path="res://objects/player.tscn" id="5_ie54i"]
-[ext_resource type="PackedScene" uid="uid://d1nyk4c13ej5n" path="res://objects/ball.tscn" id="6_a70u3"]
-[ext_resource type="PackedScene" uid="uid://bpc2udtuklk7v" path="res://objects/camera.tscn" id="7_703t4"]
+[ext_resource type="PackedScene" uid="uid://dq0i2bmd7bnf7" path="res://objects/test_spawner.tscn" id="4_f2oph"]
 
 [sub_resource type="Gradient" id="Gradient_0xm2m"]
 colors = PackedColorArray(0.518341, 0.763368, 0.953013, 1, 0.83217, 0.917437, 0.986079, 1)
@@ -36,9 +33,6 @@ position = Vector2(419, 2)
 [node name="pole" parent="." instance=ExtResource("3_em6x7")]
 position = Vector2(304, 0)
 
-[node name="test_spawner" type="Node2D" parent="."]
-position = Vector2(57, -62)
-script = ExtResource("4_f2oph")
-player_scene = ExtResource("5_ie54i")
-ball_scene = ExtResource("6_a70u3")
-camera_scene = ExtResource("7_703t4")
+[node name="spawner" parent="." node_paths=PackedStringArray("level_pole") instance=ExtResource("4_f2oph")]
+position = Vector2(31, -31)
+level_pole = NodePath("../pole")

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cyq4wrvb4jhbk"
-path="res://.godot/imported/swing-hit.wav-136bf715e8f5215902413a095ac17a00.sample"
+path="res://.godot/imported/swing_hit.wav-faddb2d5d183e1b1726c03afa5cf3868.sample"
 
 [deps]
 
-source_file="res://sounds/swing-hit.wav"
-dest_files=["res://.godot/imported/swing-hit.wav-136bf715e8f5215902413a095ac17a00.sample"]
+source_file="res://sounds/swing_hit.wav"
+dest_files=["res://.godot/imported/swing_hit.wav-faddb2d5d183e1b1726c03afa5cf3868.sample"]
 
 [params]
 

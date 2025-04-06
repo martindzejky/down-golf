@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://dq0i2bmd7bnf7"]
+
+[ext_resource type="Script" uid="uid://bar7m17x8ic8x" path="res://objects/test_spawner.gd" id="1_lvoeb"]
+[ext_resource type="PackedScene" uid="uid://r3wp4bjkcas0" path="res://objects/player.tscn" id="2_kwtlb"]
+[ext_resource type="PackedScene" uid="uid://d1nyk4c13ej5n" path="res://objects/ball.tscn" id="3_d5gim"]
+[ext_resource type="PackedScene" uid="uid://bpc2udtuklk7v" path="res://objects/camera.tscn" id="4_7b2er"]
+
+[node name="spawner" type="Node2D"]
+script = ExtResource("1_lvoeb")
+player_scene = ExtResource("2_kwtlb")
+ball_scene = ExtResource("3_d5gim")
+camera_scene = ExtResource("4_7b2er")
+metadata/_custom_type_script = "uid://bar7m17x8ic8x"

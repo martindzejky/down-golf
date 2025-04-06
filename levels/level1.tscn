@@ -1,11 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://cnbx5oq18q7kw"]
+[gd_scene load_steps=5 format=4 uid="uid://cnbx5oq18q7kw"]
 
 [ext_resource type="TileSet" uid="uid://dkvtpbgcxc1ia" path="res://levels/tiles.tres" id="1_sjb42"]
 [ext_resource type="PackedScene" uid="uid://bi3lro6q2ffel" path="res://objects/pole.tscn" id="2_pdtm5"]
-[ext_resource type="Script" uid="uid://bar7m17x8ic8x" path="res://levels/test_spawner.gd" id="3_b3oru"]
-[ext_resource type="PackedScene" uid="uid://r3wp4bjkcas0" path="res://objects/player.tscn" id="4_pdpul"]
-[ext_resource type="PackedScene" uid="uid://d1nyk4c13ej5n" path="res://objects/ball.tscn" id="5_8hd6v"]
-[ext_resource type="PackedScene" uid="uid://bpc2udtuklk7v" path="res://objects/camera.tscn" id="6_045es"]
+[ext_resource type="PackedScene" uid="uid://dq0i2bmd7bnf7" path="res://objects/test_spawner.tscn" id="3_ua5ty"]
+[ext_resource type="Script" uid="uid://bm84jm2seagao" path="res://objects/camera_bounds.gd" id="7_8hd6v"]
 
 [node name="level1" type="Node2D"]
 
@@ -17,10 +15,9 @@ tile_set = ExtResource("1_sjb42")
 [node name="pole" parent="." instance=ExtResource("2_pdtm5")]
 position = Vector2(-272, 160)
 
-[node name="spawner" type="Node2D" parent="."]
+[node name="spawner" parent="." node_paths=PackedStringArray("level_pole") instance=ExtResource("3_ua5ty")]
 position = Vector2(78, 174)
-script = ExtResource("3_b3oru")
-player_scene = ExtResource("4_pdpul")
-ball_scene = ExtResource("5_8hd6v")
-camera_scene = ExtResource("6_045es")
-metadata/_custom_type_script = "uid://bar7m17x8ic8x"
+level_pole = NodePath("../pole")
+
+[node name="camera_bounds" type="Node2D" parent="."]
+script = ExtResource("7_8hd6v")

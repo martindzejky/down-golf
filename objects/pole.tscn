@@ -34,10 +34,10 @@ radius = 25.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8k6g0"]
 size = Vector2(32, 20)
 
-[node name="pole" type="Node2D" node_paths=PackedStringArray("player_blocker")]
+[node name="pole" type="Node2D" node_paths=PackedStringArray("player_blocker") groups=["pole"]]
 z_index = -5
 script = ExtResource("1_8k6g0")
-player_blocker = NodePath("player-blocker")
+player_blocker = NodePath("player_blocker")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(7, -74)
@@ -66,11 +66,11 @@ gravity = 300.0
 [node name="shape" type="CollisionShape2D" parent="attract"]
 shape = SubResource("CircleShape2D_8k6g0")
 
-[node name="player-blocker" type="StaticBody2D" parent="."]
+[node name="player_blocker" type="StaticBody2D" parent="."]
 collision_layer = 16
 collision_mask = 0
 
-[node name="shape" type="CollisionShape2D" parent="player-blocker"]
+[node name="shape" type="CollisionShape2D" parent="player_blocker"]
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_8k6g0")
 

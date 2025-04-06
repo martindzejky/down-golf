@@ -15,3 +15,8 @@
 position = Vector2(111, -46)
 
 [node name="surface_level" parent="." instance=ExtResource("4_1bvp3")]
+
+[node name="pole" parent="surface_level" index="3"]
+is_current = true
+
+[editable path="surface_level"]

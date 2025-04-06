@@ -36,6 +36,7 @@ window/stretch/aspect="expand"
 
 player="The main player"
 ball="The one and only ball in the game"
+pole="Hit it!"
 
 [input]
 
