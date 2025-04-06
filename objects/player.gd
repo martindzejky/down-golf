@@ -6,8 +6,8 @@ const JUMP_MIN_VELOCITY = -20.0
 const JUMP_MAX_VELOCITY = -35.0
 const MIN_SHOOT_POWER = 10.0
 const MAX_SHOOT_POWER = 100.0
-const SHOOT_IMPULSE_MULTIPLIER_X = 25.0
-const SHOOT_IMPULSE_MULTIPLIER_Y = 40.0
+const SHOOT_IMPULSE_MULTIPLIER_X = 15.0
+const SHOOT_IMPULSE_MULTIPLIER_Y = 30.0
 const AIM_SPEED = 100.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes

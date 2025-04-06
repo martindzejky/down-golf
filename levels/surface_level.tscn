@@ -52,6 +52,7 @@ position = Vector2(304, 0)
 position = Vector2(200, 0)
 
 [node name="shape" parent="camera_bounds" index="0"]
+visible = false
 position = Vector2(34.5, -158)
 shape = SubResource("RectangleShape2D_53cg5")
 
