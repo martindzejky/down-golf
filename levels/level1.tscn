@@ -1,11 +1,22 @@
-[gd_scene load_steps=5 format=4 uid="uid://cnbx5oq18q7kw"]
+[gd_scene load_steps=7 format=4 uid="uid://cnbx5oq18q7kw"]
 
+[ext_resource type="PackedScene" uid="uid://boka27sfxwwg2" path="res://objects/level_activator.tscn" id="1_61w3m"]
 [ext_resource type="TileSet" uid="uid://dkvtpbgcxc1ia" path="res://levels/tiles.tres" id="1_sjb42"]
 [ext_resource type="PackedScene" uid="uid://bi3lro6q2ffel" path="res://objects/pole.tscn" id="2_pdtm5"]
 [ext_resource type="PackedScene" uid="uid://dq0i2bmd7bnf7" path="res://objects/test_spawner.tscn" id="3_ua5ty"]
-[ext_resource type="Script" uid="uid://bm84jm2seagao" path="res://objects/camera_bounds.gd" id="7_8hd6v"]
+[ext_resource type="PackedScene" uid="uid://dwqqugak3yec1" path="res://objects/camera_bounds.tscn" id="4_ua5ty"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ua5ty"]
+size = Vector2(726, 309)
 
 [node name="level1" type="Node2D"]
+
+[node name="spawner" parent="." instance=ExtResource("3_ua5ty")]
+position = Vector2(78, 174)
+
+[node name="activator" parent="." node_paths=PackedStringArray("pole", "camera_bounds") instance=ExtResource("1_61w3m")]
+pole = NodePath("../pole")
+camera_bounds = NodePath("../camera_bounds")
 
 [node name="tiles" type="TileMapLayer" parent="."]
 z_index = -20
@@ -15,9 +26,13 @@ tile_set = ExtResource("1_sjb42")
 [node name="pole" parent="." instance=ExtResource("2_pdtm5")]
 position = Vector2(-272, 160)
 
-[node name="spawner" parent="." node_paths=PackedStringArray("level_pole") instance=ExtResource("3_ua5ty")]
-position = Vector2(78, 174)
-level_pole = NodePath("../pole")
+[node name="camera_bounds" parent="." instance=ExtResource("4_ua5ty")]
 
-[node name="camera_bounds" type="Node2D" parent="."]
-script = ExtResource("7_8hd6v")
+[node name="shape" parent="camera_bounds" index="0"]
+visible = false
+position = Vector2(-175, 129.5)
+shape = SubResource("RectangleShape2D_ua5ty")
+
+[connection signal="ball_entered_hole" from="pole" to="activator" method="deactivate"]
+
+[editable path="camera_bounds"]

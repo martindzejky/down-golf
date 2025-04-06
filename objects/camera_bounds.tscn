@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwqqugak3yec1"]
+
+[ext_resource type="Script" uid="uid://bm84jm2seagao" path="res://objects/camera_bounds.gd" id="1_qcudp"]
+
+[node name="camera_bounds" type="Node2D" node_paths=PackedStringArray("shape")]
+script = ExtResource("1_qcudp")
+shape = NodePath("shape")
+
+[node name="shape" type="CollisionShape2D" parent="."]
