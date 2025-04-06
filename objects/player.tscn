@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://r3wp4bjkcas0"]
+[gd_scene load_steps=29 format=3 uid="uid://r3wp4bjkcas0"]
 
 [ext_resource type="Texture2D" uid="uid://co3au8m4vt65v" path="res://sprites/player.png" id="1_eqqp1"]
 [ext_resource type="Script" uid="uid://qpxfwcicddny" path="res://objects/player.gd" id="1_ykyjo"]
+[ext_resource type="Texture2D" uid="uid://dsicb41qrcxkv" path="res://sprites/aim_arrow.png" id="3_3nfmf"]
 [ext_resource type="Texture2D" uid="uid://0vmh4wy05uds" path="res://sprites/pow.png" id="3_uxov2"]
 [ext_resource type="AudioStream" uid="uid://cyq4wrvb4jhbk" path="res://sounds/swing_hit.wav" id="4_nmc1l"]
 [ext_resource type="AudioStream" uid="uid://dsvarkup3f2rh" path="res://sounds/swing_small.wav" id="5_3rerk"]
@@ -240,7 +241,7 @@ random_pitch = 1.3
 streams_count = 1
 stream_0/stream = ExtResource("9_4vq5b")
 
-[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("flip_node", "animation", "sprite", "shoot_strength_bar", "pow", "shoot_area_shape", "jump_key", "swing_hit_sound", "swing_small_sound", "swing_large_sound", "jump_sound", "land_sound", "ready_to_shoot_sound") groups=["player"]]
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("flip_node", "animation", "sprite", "shoot_strength_bar", "pow", "aim_arrow", "shoot_area_shape", "jump_key", "swing_hit_sound", "swing_small_sound", "swing_large_sound", "jump_sound", "land_sound", "ready_to_shoot_sound") groups=["player"]]
 collision_layer = 2
 collision_mask = 25
 script = ExtResource("1_ykyjo")
@@ -249,6 +250,7 @@ animation = NodePath("animation")
 sprite = NodePath("flip/sprite")
 shoot_strength_bar = NodePath("shoot_strength")
 pow = NodePath("pow")
+aim_arrow = NodePath("flip/aim_arrow")
 shoot_area_shape = NodePath("flip/shoot_area/shape")
 jump_key = NodePath("jump_key")
 swing_hit_sound = NodePath("swing_hit")
@@ -274,6 +276,13 @@ collision_mask = 4
 position = Vector2(8, -10)
 shape = SubResource("RectangleShape2D_ykyjo")
 disabled = true
+
+[node name="aim_arrow" type="Node2D" parent="flip"]
+visible = false
+
+[node name="sprite" type="Sprite2D" parent="flip/aim_arrow"]
+position = Vector2(32, 0)
+texture = ExtResource("3_3nfmf")
 
 [node name="shape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -28)

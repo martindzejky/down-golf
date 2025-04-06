@@ -6,8 +6,8 @@ const JUMP_MIN_VELOCITY = -20.0
 const JUMP_MAX_VELOCITY = -35.0
 const MIN_SHOOT_POWER = 10.0
 const MAX_SHOOT_POWER = 100.0
-const SHOOT_IMPULSE_MULTIPLIER = 15.0
-const SHOOT_UP_DIVISOR = 180.0
+const SHOOT_IMPULSE_MULTIPLIER = 40.0
+const AIM_SPEED = 100.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes
 var gravity = ProjectSettings.get_setting('physics/2d/default_gravity')
@@ -24,11 +24,16 @@ var shoot_power = 0.0
 var was_in_air = false
 var is_jumping = false
 
+# Aiming variables
+var aim_angle = 0.0
+var aim_direction = 1.0  # 1 for increasing, -1 for decreasing
+
 @export var flip_node: Node2D
 @export var animation: AnimationPlayer
 @export var sprite: Sprite2D
 @export var shoot_strength_bar: ProgressBar
 @export var pow: Sprite2D
+@export var aim_arrow: Node2D
 @export var shoot_area_shape: CollisionShape2D
 @export var jump_key: Timer
 
@@ -118,6 +123,24 @@ func process_ready_to_shoot_state(delta):
   # Play ready to shoot animation
   animation.play('ready_to_shoot')
 
+  # Handle aiming
+  aim_arrow.visible = true
+  aim_arrow.scale.x = 1.0
+
+  # Update aim angle
+  aim_angle += aim_direction * AIM_SPEED * delta
+
+  # Change direction when reaching limits
+  if aim_angle >= 90:
+    aim_angle = 90
+    aim_direction = -1
+  elif aim_angle <= 0:
+    aim_angle = 0
+    aim_direction = 1
+
+  # Set rotation based on player direction
+  aim_arrow.rotation_degrees = -aim_angle
+
   # Check for state transitions
   if Input.is_action_just_pressed('shoot'):
     current_state = State.CHARGING
@@ -126,11 +149,16 @@ func process_ready_to_shoot_state(delta):
   # Go back to moving if any movement input is pressed
   elif Input.is_action_pressed('move_left') or Input.is_action_pressed('move_right') or Input.is_action_pressed('jump'):
     current_state = State.MOVING
+    aim_arrow.visible = false
 
 func process_charging_state(delta):
   # Update shoot strength bar visibility
   shoot_strength_bar.visible = true
   shoot_strength_bar.value = shoot_power
+
+  # Scale aim arrow sprite based on power
+  var power_scale = 0.5 + shoot_power / MAX_SHOOT_POWER
+  aim_arrow.scale.x = power_scale
 
   # Stop all movement
   velocity = Vector2.ZERO
@@ -149,6 +177,7 @@ func process_charging_state(delta):
       current_state = State.SHOOTING
       shoot_strength_bar.visible = false
       animation.play('shooting')
+      aim_arrow.visible = false
     else:
       current_state = State.READY_TO_SHOOT
       shoot_strength_bar.visible = false
@@ -165,11 +194,16 @@ func _on_animation_animation_finished(anim_name: StringName) -> void:
   if anim_name == 'shooting':
     current_state = State.MOVING
     shoot_power = 0.0
+    aim_angle = 0.0
 
 
 func _on_shootarea_body_entered(body: Node2D) -> void:
   if body.is_in_group('ball'):
-    var direction = Vector2.RIGHT * flip_node.scale.x + Vector2.UP * (shoot_power / SHOOT_UP_DIVISOR)
+    # Calculate direction based on aim angle.
+    # Negate angle to match the arrow rotation.
+    var rad_angle = deg_to_rad(-aim_angle)
+    # When facing left, we need to flip the x component of the direction
+    var direction = Vector2(cos(rad_angle) * flip_node.scale.x, -sin(rad_angle))
     var impulse = direction * shoot_power * SHOOT_IMPULSE_MULTIPLIER
     body.apply_central_impulse(impulse)
 
