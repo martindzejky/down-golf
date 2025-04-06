@@ -28,8 +28,8 @@ tile_set = ExtResource("3_76ugp")
 position = Vector2(592, 224)
 
 [node name="ground" parent="pole" index="4"]
-position = Vector2(0, 128)
-scale = Vector2(1, 6.12)
+position = Vector2(0, 192)
+scale = Vector2(1, 11.2)
 
 [node name="camera_bounds" parent="." instance=ExtResource("5_55gdq")]
 
