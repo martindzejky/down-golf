@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
 const SPEED = 160.0
-const JUMP_VELOCITY = -400.0
+const JUMP_START_VELOCITY = -200.0
+const JUMP_MIN_VELOCITY = -20.0
+const JUMP_MAX_VELOCITY = -35.0
 const MIN_SHOOT_POWER = 10.0
 const MAX_SHOOT_POWER = 100.0
 const SHOOT_IMPULSE_MULTIPLIER = 15.0
@@ -20,6 +22,7 @@ enum State {
 var current_state = State.MOVING
 var shoot_power = 0.0
 var was_in_air = false
+var is_jumping = false
 
 @export var flip_node: Node2D
 @export var animation: AnimationPlayer
@@ -27,6 +30,7 @@ var was_in_air = false
 @export var shoot_strength_bar: ProgressBar
 @export var pow: Sprite2D
 @export var shoot_area_shape: CollisionShape2D
+@export var jump_key: Timer
 
 @export var swing_hit_sound: AudioStreamPlayer
 @export var swing_small_sound: AudioStreamPlayer
@@ -54,9 +58,24 @@ func process_moving_state(delta):
   if not is_on_floor():
     velocity.y += gravity * delta
 
+    # Apply jump force while key is held and timer is running
+    if is_jumping and Input.is_action_pressed('jump') and not jump_key.is_stopped():
+      # Interpolate from max to min velocity as timer counts down
+      var t = jump_key.time_left / jump_key.wait_time
+      var jump_force = lerp(JUMP_MIN_VELOCITY, JUMP_MAX_VELOCITY, t)
+      velocity.y += jump_force * delta * 60.0  # Normalize to 60fps
+    elif not Input.is_action_pressed('jump'):
+      # Reset jumping state when key is released
+      is_jumping = false
+  else:
+    # Reset jumping state when on floor
+    is_jumping = false
+
   # Handle jump
   if Input.is_action_just_pressed('jump') and is_on_floor():
-    velocity.y = JUMP_VELOCITY
+    is_jumping = true
+    jump_key.start()
+    velocity.y = JUMP_START_VELOCITY
     jump_sound.play()
 
   # Get the input direction and handle the movement/deceleration
