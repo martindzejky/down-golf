@@ -213,6 +213,9 @@ stream = SubResource("AudioStreamRandomizer_r8tcx")
 max_distance = 1500.0
 bus = &"pole sounds"
 
+[node name="camera_marker" type="Marker2D" parent="."]
+position = Vector2(7, -123)
+
 [connection signal="ball_entered_hole" from="." to="honk" method="play"]
 [connection signal="ball_entered_hole" from="." to="falling_hole" method="play"]
 [connection signal="player_entered_pole" from="." to="falling_hole" method="play"]

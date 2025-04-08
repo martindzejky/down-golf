@@ -1,7 +1,8 @@
 extends Camera2D
 
-const POLE_CONSIDERATION_DISTANCE = 800
-const PLAYER_VIEW_MARGIN = 150
+const BALL_CONSIDERATION_DISTANCE = 600
+const POLE_CONSIDERATION_DISTANCE = 400
+const PLAYER_VIEW_MARGIN = 200
 
 var player: Node2D
 var ball: Node2D
@@ -20,6 +21,11 @@ func _process(_delta):
       current_pole = pole
       break
 
+  # Poles have a camera_marker child node which should be used for camera calculations
+  var pole_camera_marker = null
+  if current_pole:
+    pole_camera_marker = current_pole.get_node('camera_marker')
+
   # Get current viewport size (in screen coordinates)
   var viewport_size = get_viewport_rect().size
 
@@ -28,13 +34,21 @@ func _process(_delta):
 
   # Calculate the midpoint between player and ball, and possibly pole
   var midpoint: Vector2
+  var points = [player.global_position]
 
-  if current_pole and player.global_position.distance_to(current_pole.global_position) < POLE_CONSIDERATION_DISTANCE:
-    # Include pole in calculation if player is close enough
-    midpoint = (player.global_position + ball.global_position + current_pole.global_position) / 3
-  else:
-    # Otherwise just use player and ball
-    midpoint = (player.global_position + ball.global_position) / 2
+  # Check if ball is close enough to consider
+  if player.global_position.distance_to(ball.global_position) < BALL_CONSIDERATION_DISTANCE:
+    points.append(ball.global_position)
+
+  # Check if pole is close enough to consider
+  if pole_camera_marker and player.global_position.distance_to(pole_camera_marker.global_position) < POLE_CONSIDERATION_DISTANCE:
+    points.append(pole_camera_marker.global_position)
+
+  # Calculate midpoint based on all considered points
+  midpoint = Vector2.ZERO
+  for point in points:
+    midpoint += point
+  midpoint = midpoint / points.size()
 
   # Calculate max distance from player to keep them in view (half viewport minus margin)
   # The margin is also scaled by zoom
