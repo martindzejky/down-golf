@@ -68,6 +68,7 @@ tile_map_data = PackedByteArray("AAAAAPr/AAADAAAAAAAAAPv/AAADAAAAAAAAAPz/AAADAAA
 tile_set = ExtResource("1_0bd6o")
 
 [node name="end_pole" type="AnimatedSprite2D" parent="."]
+z_index = -10
 position = Vector2(20, 214)
 sprite_frames = SubResource("SpriteFrames_kf367")
 autoplay = "default"
