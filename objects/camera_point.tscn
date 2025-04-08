@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bijolayvxiy8y"]
+
+[ext_resource type="Script" uid="uid://du84645tqjcr5" path="res://objects/camera_point.gd" id="1_wcja2"]
+
+[node name="camera_point" type="Marker2D" groups=["camera_point"]]
+script = ExtResource("1_wcja2")

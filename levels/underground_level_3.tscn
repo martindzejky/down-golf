@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://c8wbrirjv7qq0"]
+[gd_scene load_steps=9 format=4 uid="uid://c8wbrirjv7qq0"]
 
 [ext_resource type="PackedScene" uid="uid://dq0i2bmd7bnf7" path="res://objects/test_spawner.tscn" id="1_g1dg4"]
 [ext_resource type="PackedScene" uid="uid://boka27sfxwwg2" path="res://objects/level_activator.tscn" id="2_s1bpp"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bi3lro6q2ffel" path="res://objects/pole.tscn" id="4_e8p81"]
 [ext_resource type="PackedScene" uid="uid://dwqqugak3yec1" path="res://objects/camera_bounds.tscn" id="5_55gdq"]
 [ext_resource type="Texture2D" uid="uid://0v6vrtnll1m" path="res://sprites/ground.png" id="6_udvx3"]
+[ext_resource type="PackedScene" uid="uid://bijolayvxiy8y" path="res://objects/camera_point.tscn" id="7_c5nsb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpie4"]
 size = Vector2(960, 453)
@@ -47,6 +48,10 @@ polygon = PackedVector2Array(512, 224, 448, 256, 192, 336, 112, 336, -48, 432, 5
 [node name="sprite" type="Polygon2D" parent="slope_polygon"]
 texture = ExtResource("6_udvx3")
 polygon = PackedVector2Array(512, 224, 448, 256, 192, 336, 112, 336, -48, 432, 544, 432, 544, 240)
+
+[node name="camera_point" parent="." instance=ExtResource("7_c5nsb")]
+position = Vector2(298, 185)
+consideration_distance = 800.0
 
 [connection signal="player_entered_pole" from="pole" to="activator" method="deactivate"]
 

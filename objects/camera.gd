@@ -26,6 +26,15 @@ func _process(_delta):
   if current_pole:
     pole_camera_marker = current_pole.get_node('camera_marker')
 
+  # Find all camera points
+  var camera_points = get_tree().get_nodes_in_group('camera_point')
+
+  # Filter only those that are within their consideration distance of the player
+  var filtered_camera_points = []
+  for point in camera_points:
+    if point.global_position.distance_to(player.global_position) < point.consideration_distance:
+      filtered_camera_points.append(point)
+
   # Get current viewport size (in screen coordinates)
   var viewport_size = get_viewport_rect().size
 
@@ -43,6 +52,10 @@ func _process(_delta):
   # Check if pole is close enough to consider
   if pole_camera_marker and player.global_position.distance_to(pole_camera_marker.global_position) < POLE_CONSIDERATION_DISTANCE:
     points.append(pole_camera_marker.global_position)
+
+  # Add all filtered camera points
+  for point in filtered_camera_points:
+    points.append(point.global_position)
 
   # Calculate midpoint based on all considered points
   midpoint = Vector2.ZERO

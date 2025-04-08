@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://waen4dntsthe"]
+[gd_scene load_steps=9 format=4 uid="uid://waen4dntsthe"]
 
 [ext_resource type="PackedScene" uid="uid://dq0i2bmd7bnf7" path="res://objects/test_spawner.tscn" id="1_g1dg4"]
 [ext_resource type="PackedScene" uid="uid://boka27sfxwwg2" path="res://objects/level_activator.tscn" id="2_s1bpp"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bi3lro6q2ffel" path="res://objects/pole.tscn" id="4_e8p81"]
 [ext_resource type="PackedScene" uid="uid://dwqqugak3yec1" path="res://objects/camera_bounds.tscn" id="5_55gdq"]
 [ext_resource type="PackedScene" uid="uid://csbehapi3c3ml" path="res://objects/trampoline.tscn" id="6_ugw02"]
+[ext_resource type="PackedScene" uid="uid://bijolayvxiy8y" path="res://objects/camera_point.tscn" id="7_ig2e2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ua5ty"]
 size = Vector2(528, 704)
@@ -43,6 +44,10 @@ position = Vector2(64, 480)
 
 [node name="trampoline2" parent="." instance=ExtResource("6_ugw02")]
 position = Vector2(-32, 288)
+
+[node name="camera_point" parent="." instance=ExtResource("7_ig2e2")]
+position = Vector2(-32, 128)
+consideration_distance = 800.0
 
 [connection signal="player_entered_pole" from="pole" to="activator" method="deactivate"]
 

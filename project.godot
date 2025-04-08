@@ -39,6 +39,7 @@ window/stretch/aspect="expand"
 player="The main player"
 ball="The one and only ball in the game"
 pole="Hit it!"
+camera_point="Interest point for camera tracking."
 
 [gui]
 
@@ -86,6 +87,11 @@ menu={
 2d_physics/layer_3="ball"
 2d_physics/layer_4="bounds"
 2d_physics/layer_5="player-blocker"
+
+[physics]
+
+2d/default_linear_damp=0.5
+2d/default_angular_damp=5.0
 
 [rendering]
 
