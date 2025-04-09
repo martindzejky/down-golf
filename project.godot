@@ -91,6 +91,7 @@ menu={
 
 2d/default_linear_damp=0.5
 2d/default_angular_damp=5.0
+common/physics_interpolation=true
 
 [rendering]
 
