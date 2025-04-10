@@ -85,7 +85,7 @@ func _process(delta):
   var zoom_y = viewport_size.y / limit_height
 
   # Use the smaller zoom to ensure "contain" behavior
-  var target_zoom = min(zoom_x, zoom_y)
+  var target_zoom = max(zoom_x, zoom_y)
 
   # Minimum zoom is 2x
   target_zoom = max(target_zoom, 2.0)
