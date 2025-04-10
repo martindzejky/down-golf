@@ -1,0 +1,82 @@
+[gd_scene load_steps=14 format=3 uid="uid://dfwkuxfg1oa"]
+
+[ext_resource type="PackedScene" uid="uid://bpc2udtuklk7v" path="res://objects/camera.tscn" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://r3wp4bjkcas0" path="res://objects/player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://drtc2w32yxa3e" path="res://main.gd" id="1_lquwl"]
+[ext_resource type="PackedScene" uid="uid://d1nyk4c13ej5n" path="res://objects/ball.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://y5nnkqj2u5wb" path="res://levels/surface_level.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bb7qgw1ullq8g" path="res://levels/underground_level_1.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://b5xud57qkbrfl" path="res://levels/underground_level_2.tscn" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://c8wbrirjv7qq0" path="res://levels/underground_level_3.tscn" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://7be64munav1p" path="res://levels/underground_level_4.tscn" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://xtl8lxoccgfe" path="res://levels/trampoline_level_1.tscn" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://q3xm8b0pp3no" path="res://levels/trampoline_level_2.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://waen4dntsthe" path="res://levels/trampoline_level_3.tscn" id="12_dg77c"]
+[ext_resource type="PackedScene" uid="uid://cc0ju0c4uot8c" path="res://levels/end.tscn" id="13_ycdy4"]
+
+[node name="main" type="Node" node_paths=PackedStringArray("first_level_activator")]
+script = ExtResource("1_lquwl")
+first_level_activator = NodePath("surface_level/activator")
+
+[node name="camera" parent="." instance=ExtResource("1_1bvp3")]
+
+[node name="player" parent="." instance=ExtResource("1_ig7tw")]
+
+[node name="ball" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(111, -235)
+
+[node name="surface_level" parent="." instance=ExtResource("4_1bvp3")]
+
+[node name="underground_level_1" parent="." instance=ExtResource("6_7mycd")]
+position = Vector2(288, 224)
+
+[node name="underground_level_2" parent="." instance=ExtResource("7_272bh")]
+position = Vector2(0, 704)
+
+[node name="underground_level_3" parent="." instance=ExtResource("8_5vw27")]
+position = Vector2(-288, 1184)
+
+[node name="underground_level_4" parent="." instance=ExtResource("9_kek77")]
+position = Vector2(288, 1920)
+
+[node name="trampoline_level_1" parent="." instance=ExtResource("10_4c57u")]
+position = Vector2(1408, 2720)
+
+[node name="trampoline_level_2" parent="." instance=ExtResource("11_efxa6")]
+position = Vector2(1248, 3296)
+
+[node name="trampoline_level_3" parent="." instance=ExtResource("12_dg77c")]
+position = Vector2(1920, 3936)
+
+[node name="end" parent="." instance=ExtResource("13_ycdy4")]
+position = Vector2(1760, 4704)
+
+[connection signal="player_entered_pole" from="surface_level/pole" to="underground_level_1/activator" method="activate"]
+[connection signal="player_entered_pole" from="underground_level_1/pole" to="underground_level_2/activator" method="activate"]
+[connection signal="player_entered_pole" from="underground_level_2/pole" to="underground_level_3/activator" method="activate"]
+[connection signal="player_entered_pole" from="underground_level_3/pole" to="underground_level_4/activator" method="activate"]
+[connection signal="player_entered_pole" from="underground_level_4/pole" to="trampoline_level_1/activator" method="activate"]
+[connection signal="player_entered_pole" from="trampoline_level_1/pole" to="trampoline_level_2/activator" method="activate"]
+[connection signal="player_entered_pole" from="trampoline_level_2/pole" to="trampoline_level_3/activator" method="activate"]
+
+[editable path="surface_level"]
+[editable path="surface_level/camera_bounds"]
+[editable path="underground_level_1"]
+[editable path="underground_level_1/camera_bounds"]
+[editable path="underground_level_2"]
+[editable path="underground_level_2/pole"]
+[editable path="underground_level_2/camera_bounds"]
+[editable path="underground_level_3"]
+[editable path="underground_level_3/pole"]
+[editable path="underground_level_3/camera_bounds"]
+[editable path="underground_level_4"]
+[editable path="underground_level_4/pole"]
+[editable path="underground_level_4/camera_bounds"]
+[editable path="trampoline_level_1"]
+[editable path="trampoline_level_1/pole"]
+[editable path="trampoline_level_1/camera_bounds"]
+[editable path="trampoline_level_2"]
+[editable path="trampoline_level_2/camera_bounds"]
+[editable path="trampoline_level_3"]
+[editable path="trampoline_level_3/pole"]
+[editable path="trampoline_level_3/camera_bounds"]
