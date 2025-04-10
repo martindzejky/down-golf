@@ -12,7 +12,7 @@ func _ready():
   player = get_tree().get_first_node_in_group('player')
   ball = get_tree().get_first_node_in_group('ball')
 
-func _process(_delta):
+func _process(delta):
   # Find the current pole
   var poles = get_tree().get_nodes_in_group('pole')
   var current_pole = null
@@ -74,3 +74,21 @@ func _process(_delta):
 
   # Set camera position
   global_position = player.global_position + offset
+
+  # Calculate the camera zoom
+  # Limits are set by the level bounds
+  var limit_width = limit_right - limit_left
+  var limit_height = limit_bottom - limit_top
+
+  # Calculate zoom needed to fit the viewport into the limits
+  var zoom_x = viewport_size.x / limit_width
+  var zoom_y = viewport_size.y / limit_height
+
+  # Use the smaller zoom to ensure "contain" behavior
+  var target_zoom = min(zoom_x, zoom_y)
+
+  # Minimum zoom is 2x
+  target_zoom = max(target_zoom, 2.0)
+
+  # Apply zoom smoothly
+  zoom = zoom.lerp(Vector2(target_zoom, target_zoom), 0.05 * delta * 60)
