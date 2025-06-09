@@ -30,6 +30,7 @@ Down Golf combines platforming mechanics with golf gameplay. You must navigate t
 
 ## Links
 
+- [YouTube playlist with videos](https://www.youtube.com/playlist?list=PL52FaSLR1fYgYbtqNZ-RoWnRCK8SwrO3V)
 - Play online at [Itch.io](https://martindzejky.itch.io/down-golf)
 - Download from [releases](https://github.com/martindzejky/down-golf/releases)
 - [Submission page](https://ldjam.com/events/ludum-dare/57/down-golf)
